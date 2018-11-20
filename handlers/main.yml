@@ -1,0 +1,4 @@
+---
+# handlers file for awx-server
+- name: Reboot server
+  reboot:

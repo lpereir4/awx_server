@@ -1,0 +1,14 @@
+---
+- name: Install EPEL repository
+  yum:
+    name: "{{ epel_repo_url }}"
+    state: present
+  register: epel_repo_install
+  retries: 5
+  delay: 10
+  until: epel_repo_install.rc == 0
+
+- name: Import EPEL repository GPG key
+  rpm_key:
+    key: "{{ awx_server_epel_repo_gpg_key_url }}"
+    state: present
