@@ -1,7 +1,7 @@
 ---
 - name: Install EPEL repository
   yum:
-    name: "{{ epel_repo_url }}"
+    name: "{{ awx_server_epel_repo_url }}"
     state: present
   register: epel_repo_install
   retries: 5
