@@ -1,7 +1,7 @@
 ---
-awx_server_version: "2.1.0"
+awx_server_version: "2.1.2"
 awx_server_src_dir: "/usr/local/src/awx"
-
+awx_listen_port: 80
 awx_server_epel_repo_url: >-
   https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
 

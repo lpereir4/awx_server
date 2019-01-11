@@ -54,6 +54,13 @@
     dest: "{{ awx_server_src_dir }}"
     version: "{{ awx_server_version }}"
 
+- lineinfile:
+    path: "{{ awx_server_src_dir }}/installer/inventory"
+    regex: >-
+      host_port=.*
+    line: >-
+      host_port={{ awx_listen_port }}
+
 - name: Start AWX installer (long running)
   shell: >-
     ansible-playbook -i inventory install.yml
