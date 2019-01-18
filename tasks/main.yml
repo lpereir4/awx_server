@@ -9,6 +9,15 @@
   when:
     - not epel_repofile.stat.exists
 
+- yum_repository:
+    name: "docker-ce-stable"
+    description: "Docker CE Stable"
+    baseurl: "https://download.docker.com/linux/centos/7/$basearch/stable"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+
+
 - name: Disable firewalld
   service:
     name: firewalld
@@ -30,9 +39,11 @@
     state: present
     update_cache: yes
   loop:
+    - device-mapper-persistent-data
+    - lvm2
     - git
     - gettext
-    - docker
+    - docker-ce
     - nodejs
     - npm
     - gcc-c++
@@ -53,6 +64,7 @@
     repo: "https://github.com/ansible/awx.git"
     dest: "{{ awx_server_src_dir }}"
     version: "{{ awx_server_version }}"
+    force: yes
 
 - lineinfile:
     path: "{{ awx_server_src_dir }}/installer/inventory"
@@ -72,4 +84,3 @@
     )
   args:
     chdir: "{{ awx_server_src_dir }}/installer"
-
