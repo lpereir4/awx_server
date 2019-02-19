@@ -10,3 +10,7 @@ awx_server_epel_repo_gpg_key_url: >-
 
 awx_server_epel_repofile_path: >-
   /etc/yum.repos.d/epel.repo
+
+awx_server_installer_variables:
+  host_port: "{{ awx_listen_port }}"
+  postgres_data_dir: "/var/run/pgawx"

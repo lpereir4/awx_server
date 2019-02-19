@@ -1,0 +1,3 @@
+---
+awx_server_installer_unchanged_marker: >-
+  localhost.*ok=13.*changed=6

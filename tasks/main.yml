@@ -69,9 +69,10 @@
 - lineinfile:
     path: "{{ awx_server_src_dir }}/installer/inventory"
     regex: >-
-      host_port=.*
+      {{ item.key }}=.*
     line: >-
-      host_port={{ awx_listen_port }}
+      {{ item.key }}={{ item.value }}
+  loop: "{{ awx_server_installer_variables|dict2items }}"
 
 - name: Start AWX installer (long running)
   shell: >-
@@ -80,7 +81,7 @@
   changed_when: >-
     not (
       sh_awx_installer.stdout
-      |regex_search('localhost.*ok=13.*changed=6', multiline=True)
+      |regex_search(awx_server_installer_unchanged_marker, multiline=True)
     )
   args:
     chdir: "{{ awx_server_src_dir }}/installer"
