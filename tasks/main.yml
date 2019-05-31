@@ -48,10 +48,24 @@
     - npm
     - gcc-c++
     - bzip2
+    - ansible
+    - python-pip
+
+- name: Upgrade pip
+  shell: "pip install --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org -U pip"
+
+- name: remove cloud-init
+  yum:
+    name: cloud-init
+    state: absent
+
+- name: remove python-requests
+  yum:
+    name: python-requests
+    state: absent
 
 - name: Install AWX Python dependencies
-  pip:
-    name: docker-py
+  shell: "pip install --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org -U docker-compose"
 
 - name: Start and enable Docker service
   service:

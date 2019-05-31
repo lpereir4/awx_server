@@ -1,5 +1,5 @@
 ---
-awx_server_version: "3.0.1"
+awx_server_version: "4.0.0"
 awx_server_src_dir: "/usr/local/src/awx"
 
 awx_server_listen_port: 80
